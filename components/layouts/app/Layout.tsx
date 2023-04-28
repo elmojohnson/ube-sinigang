@@ -33,7 +33,7 @@ const Layout: React.FC<AppLayout> = ({ children }) => {
       <div className="lg:block hidden">
         <Drawer />
       </div>
-      <div className="w-full h-full overflow-y-scroll">
+      <div className="w-full h-full overflow-y-scroll bg-slate-200">
         <Navbar />
         <main className="wrapper">{children}</main>
       </div>
