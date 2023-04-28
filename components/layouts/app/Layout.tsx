@@ -19,7 +19,7 @@ const Layout: React.FC<AppLayout> = ({ children }) => {
     }
   }, []);
 
-  if (isLoggedIn) {
+  if (!isLoggedIn) {
     return <Login />;
   }
 

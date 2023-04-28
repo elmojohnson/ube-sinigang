@@ -1,27 +1,22 @@
-import { User } from '@/types';
-import React, { useEffect, useState } from 'react'
+import { User } from "@/types";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 const useUser = () => {
-    const [user, setUser] = useState<User>();
-    const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
-    
-    const login = () => {
-      
-    }
+  const router = useRouter();
+  const [user, setUser] = useState<User>();
+  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
 
-    const logout = () => {
+  const login = () => {
+    localStorage.setItem("access_token", "asd");
+    router.reload();
+  };
 
-    }
+  const logout = () => {};
 
-    const profile = () => {
+  useEffect(() => {}, []);
 
-    }
+  return { user, isLoggedIn, login, logout };
+};
 
-    useEffect(() => {
-
-    }, [])
-
-  return {}
-}
-
-export default useUser
+export default useUser;
