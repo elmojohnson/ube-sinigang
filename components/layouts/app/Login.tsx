@@ -2,11 +2,12 @@ import useUser from "@/hooks/useUser";
 import React from "react";
 
 const Login = () => {
-  const { login } = useUser();
+  const { loginUrl } = useUser();
+
   return (
     <div className="flex h-screen w-screen items-center justify-center">
       <div>
-        <button onClick={login}>Login</button>
+        <a href={loginUrl}>Login</a>
       </div>
     </div>
   );
