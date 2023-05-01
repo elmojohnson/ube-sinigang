@@ -6,8 +6,9 @@ const Login = () => {
 
   return (
     <div className="flex h-screen w-screen items-center justify-center">
-      <div>
-        <a href={loginUrl}>Login</a>
+      <div className="flex flex-col items-center space-y-3">
+        <h1 className="header">Spotify Clone</h1>
+        <a href={loginUrl} className="btn bg-spotify text-white">Login with Spotify</a>
       </div>
     </div>
   );
