@@ -1,9 +1,10 @@
-import SpotifyWebApi from "spotify-web-api-node";
+import axios from "axios";
 
-var Spotify = new SpotifyWebApi({
-    clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
-    clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
-    redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URI
+const spotify = axios.create({
+    baseURL: "https://api.spotify.com/v1",
+    headers: {
+        "Authorization": "Bearer " + localStorage.getItem("access_token")
+    }
 });
 
-export default Spotify;
+export default spotify;
