@@ -6,12 +6,13 @@ import axios from "axios";
 const useUser = () => {
   const router = useRouter();
 
-  // Login
+  // Login data
   const [loginUrl, setLoginUrl] = useState<string>("");
 
-  // User
+  // User data
   const [user, setUser] = useState<User>();
 
+  // Generate login url
   const getLoginUrl = async () => {
     try {
       const result = await axios.get("/api/auth/login_url");
@@ -21,9 +22,18 @@ const useUser = () => {
     }
   };
 
-  const getTokens = async () => {
+  // Get access token and refresh token by providing a code
+  // Store access token and refresh token to local storage
+  const getTokens = async (code: string) => {
     try {
-      const result = await axios.post("/api/auth/tokens")
+      const result = await axios.post("/api/auth/callback", {code});
+      
+      // Set tokens to local storage
+      localStorage.setItem("access_token", result.data.access_token);
+      localStorage.setItem("refresh_token", result.data.refresh_token);
+
+      // Remove code query params and reload
+      router.replace('/', undefined, { shallow: false });
     } catch (error) {
       console.error(error);
     }
@@ -38,14 +48,14 @@ const useUser = () => {
 
   // Check if login url changed value
   useEffect(() => {
-    // Run this if there's a value for loginUrl
+    // Execute this if there's a value for loginUrl
     if (loginUrl) {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const code = urlParams.get("code");
 
       if (code) {
-        console.log(code);
+        getTokens(code);
       }
     }
   }, [loginUrl]);
