@@ -3,12 +3,14 @@ import Navbar from "./Navbar";
 import Login from "./Login";
 import Drawer from "./Drawer";
 import LayoutContext from "@/contexts/LayoutContext";
+import { useRouter } from "next/router";
 
 interface AppLayout {
   children: any;
 }
 
 const Layout: React.FC<AppLayout> = ({ children }) => {
+  const router = useRouter();
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
   const ctx = useContext(LayoutContext);
 
@@ -17,7 +19,7 @@ const Layout: React.FC<AppLayout> = ({ children }) => {
     if (localStorage.getItem("access_token")) {
       setLoggedIn(true);
     }
-  }, []);
+  }, [router]);
 
   if (!isLoggedIn) {
     return <Login />;

@@ -26,18 +26,20 @@ const useUser = () => {
   // Store access token and refresh token to local storage
   const getTokens = async (code: string) => {
     try {
-      const result = await axios.post("/api/auth/callback", {code});
-      
+      const result = await axios.post("/api/auth/callback", { code });
+
       // Set tokens to local storage
       localStorage.setItem("access_token", result.data.access_token);
       localStorage.setItem("refresh_token", result.data.refresh_token);
 
-      // Remove code query params and reload
-      router.replace('/', undefined, { shallow: false });
+      // Remove code's query params and reload
+      if(localStorage.getItem("access_token")) {
+        router.push("/")
+      }
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   // Check if access token is present
   useEffect(() => {
