@@ -10,4 +10,8 @@
     .header {
         @apply font-bold text-3xl
     }
+
+    .btn {
+        @apply px-4 py-2 bg-slate-300 font-bold rounded-lg hover:brightness-90
+    }
 }
